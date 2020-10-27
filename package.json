@@ -9,6 +9,7 @@
   "author": "Chaudhry Junaid Anwar",
   "license": "UNLICENSED",
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "soap": "^0.33.0"
   }
 }
