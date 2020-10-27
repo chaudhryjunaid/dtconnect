@@ -21,7 +21,7 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
         console.log('Register result:', result);
         const cookieValue = result.RegisterResult;
         console.log('clientId:', cookieValue);
-        fs.readFile('sum.pdf', { encoding: 'base64' }, function(err, content) {
+        fs.readFile('sum.pdf', function(err, content) {
             if (err) {
                 return console.log('Error reading file:', err.message, err.stack);
             }
@@ -36,7 +36,7 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
             };
             client.InsertDocument(insertArgs, function(err, insertResult) {
                 if (err) {
-                    return console.log(err, err instanceof Error, 'Error in InsertDocument:', insertResult, err.message, err.stack);
+                    return console.log(err, 'Error in InsertDocument:', err.message, err.stack);
                 }
                 console.log('InsertDocument result:', insertResult);
             });
