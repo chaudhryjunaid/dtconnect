@@ -28,7 +28,7 @@ soap.createClient(url, function(err, client) {
                 clientId: cookieValue,
                 sourceName: 'Oak Park',
                 sourceID: '103',
-                xmlAssociationDoc: null,
+                xmlAssociationDoc: '',
                 mimeType: 'application/pdf',
                 documentFile: content
             };
