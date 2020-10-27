@@ -28,8 +28,8 @@ soap.createClient(url, function(err, client) {
             console.log('isBuffer(content):', Buffer.isBuffer(content));
             const insertArgs = {
                 clientId: cookieValue,
-                sourceName: 'Oak Park',
-                sourceID: '103',
+                sourceName: process.env.IRC,
+                sourceID: process.env.BUC,
                 xmlAssociationDoc: null,
                 mimeType: 'application/pdf',
                 documentFile: content
