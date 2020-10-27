@@ -1,5 +1,6 @@
 require('dotenv').config();
 const soap = require('soap');
+const fs = require('fs');
 const url = process.env.URL;
 
 console.log('Creating SOAP client for: ', process.env.URL);
@@ -18,5 +19,26 @@ soap.createClient(url, function(err, client) {
             return console.log('Error registering client:', err.message, err.stack);
         }
         console.log('Register result:', result);
+        const cookieValue = result.RegisterResult;
+        fs.readFile('sum.pdf', null, function(err, content) {
+            if (err) {
+                return console.log('Error reading file:', err.message, err.stack);
+            }
+            const insertArgs = {
+                clientID: cookieValue,
+                sourceName: 'Oak Park',
+                sourceID: '103',
+                XMLAssociationDoc: null,
+                MIMEType: 'application/pdf',
+                documentFile: content
+            };
+            client.InsertDocument(args, function(err, insertResult) {
+                if (err) {
+                    return console.log('Error in InsertDocument:', err.message, err.stack);
+                }
+                console.log('InsertDocument result:', insertResult);
+            });
+        });
+        
     });
 });
