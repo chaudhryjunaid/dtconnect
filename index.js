@@ -1,7 +1,6 @@
 require('dotenv').config();
 const soap = require('soap');
 const url = process.env.URL;
-// const args = {name: 'value'};
 
 console.log('Creating SOAP client for: ', process.env.URL);
 soap.createClient(url, function(err, client) {
@@ -9,7 +8,15 @@ soap.createClient(url, function(err, client) {
         return console.log('Error creating SOAP client:', err.message, err.stack);
     }
     console.log('Success creating SOAP client!');
-    // client.MyFunction(args, function(err, result) {
-    //     console.log(result);
-    // });
+    const args = {
+        sUserName: process.env.USERNAME,
+        sPassword: process.env.PASSWD,
+        sDocuTrackUserID: process.env.IRC
+    };
+    client.Register(args, function(err, result) {
+        if (err) {
+            return console.log('Error registering client:', err.message, err.stack);
+        }
+        console.log('Register result:', result);
+    });
 });
