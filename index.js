@@ -19,17 +19,17 @@ soap.createClient(url, function(err, client) {
             return console.log('Error registering client:', err.message, err.stack);
         }
         console.log('Register result:', result);
-        const cookieValue = result.RegisterResult;
+        const cookieValue = parseInt(result.RegisterResult, 10);
         fs.readFile('sum.pdf', null, function(err, content) {
             if (err) {
                 return console.log('Error reading file:', err.message, err.stack);
             }
             const insertArgs = {
-                clientID: cookieValue,
+                clientId: cookieValue,
                 sourceName: 'Oak Park',
                 sourceID: '103',
-                XMLAssociationDoc: null,
-                MIMEType: 'application/pdf',
+                xmlAssociationDoc: null,
+                mimeType: 'application/pdf',
                 documentFile: content
             };
             client.InsertDocument(args, function(err, insertResult) {
