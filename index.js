@@ -9,9 +9,9 @@ soap.createClient(url, function(err, client) {
     }
     console.log('Success creating SOAP client!');
     const args = {
+        sClientType: process.env.IRC,
         sUserName: process.env.USERNAME,
-        sPassword: process.env.PASSWD,
-        sDocuTrackUserID: process.env.IRC
+        sClientIPAddress: null
     };
     client.Register(args, function(err, result) {
         if (err) {
