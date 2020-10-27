@@ -9,9 +9,9 @@ soap.createClient(url, function(err, client) {
     }
     console.log('Success creating SOAP client!');
     const args = {
-        sClientType: process.env.IRC,
-        sUserName: process.env.USERNAME,
-        sClientIPAddress: null
+        clientType: process.env.IRC,
+        userName: process.env.USERNAME,
+        clientIPAddress: null
     };
     client.Register(args, function(err, result) {
         if (err) {
