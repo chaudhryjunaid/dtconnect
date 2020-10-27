@@ -9,7 +9,6 @@ soap.createClient(url, options, function(err, client) {
         return console.log('Error creating SOAP client:', err.message, err.stack);
     }
     console.log('Success creating SOAP client!');
-    console.log(client);
     const args = {
         clientType: process.env.IRC,
         userName: process.env.USERNAME,
