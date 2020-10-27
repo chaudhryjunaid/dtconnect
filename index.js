@@ -1,10 +1,10 @@
 require('dotenv').config();
-const soap = require('soap');
+const soap = require('strong-soap').soap;
 const fs = require('fs');
 const url = process.env.URL;
-
+const options = {};
 console.log('Creating SOAP client for: ', process.env.URL);
-soap.createClient(url, { endpoint: url }, function(err, client) {
+soap.createClient(url, options, function(err, client) {
     if (err) {
         return console.log('Error creating SOAP client:', err.message, err.stack);
     }
@@ -21,7 +21,7 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
         console.log('Register result:', result);
         const cookieValue = parseInt(result.RegisterResult, 10);
         console.log('clientId:', cookieValue);
-        fs.readFile('sum.pdf', { encoding: 'base64' }, function(err, content) {
+        fs.readFile('sum.pdf', { encoding: null }, function(err, content) {
             if (err) {
                 return console.log('Error reading file:', err.message, err.stack);
             }
@@ -36,11 +36,10 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
             };
             client.InsertDocument(insertArgs, function(err, insertResult) {
                 if (err) {
-                    return console.log(err, err instanceof Error, 'Error in InsertDocument:', insertResult, err.message, err.stack);
+                    return console.log('Error in InsertDocument:', err);
                 }
                 console.log('InsertDocument result:', insertResult);
             });
         });
-        
     });
 });
