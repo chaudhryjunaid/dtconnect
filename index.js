@@ -19,7 +19,7 @@ soap.createClient(url, function(err, client) {
             return console.log('Error registering client:', err.message, err.stack);
         }
         console.log('Register result:', result);
-        const cookieValue = parseInt(result.RegisterResult, 10);
+        const cookieValue = result.RegisterResult;
         console.log('clientId:', cookieValue);
         fs.readFile('sum.pdf', function(err, content) {
             if (err) {
