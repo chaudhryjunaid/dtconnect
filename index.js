@@ -20,10 +20,12 @@ soap.createClient(url, function(err, client) {
         }
         console.log('Register result:', result);
         const cookieValue = parseInt(result.RegisterResult, 10);
+        console.log('clientId:', cookieValue);
         fs.readFile('sum.pdf', null, function(err, content) {
             if (err) {
                 return console.log('Error reading file:', err.message, err.stack);
             }
+            console.log('typeof(content):', typeof content);
             const insertArgs = {
                 clientId: cookieValue,
                 sourceName: 'Oak Park',
