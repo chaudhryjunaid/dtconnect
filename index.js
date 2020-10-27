@@ -30,11 +30,11 @@ soap.createClient(url, function(err, client) {
                 clientId: cookieValue,
                 sourceName: 'Oak Park',
                 sourceID: '103',
-                xmlAssociationDoc: '',
+                xmlAssociationDoc: null,
                 mimeType: 'application/pdf',
                 documentFile: content
             };
-            client.InsertDocument(args, function(err, insertResult) {
+            client.InsertDocument(insertArgs, function(err, insertResult) {
                 if (err) {
                     return console.log('Error in InsertDocument:', err.message, err.stack);
                 }
