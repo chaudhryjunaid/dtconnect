@@ -36,7 +36,7 @@ soap.createClient(url, function(err, client) {
             };
             client.InsertDocument(insertArgs, function(err, insertResult) {
                 if (err) {
-                    return console.log('Error in InsertDocument:', err.message, err.stack);
+                    return console.log(err, 'Error in InsertDocument:', err.message, err.stack);
                 }
                 console.log('InsertDocument result:', insertResult);
             });
