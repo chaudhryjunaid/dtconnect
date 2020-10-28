@@ -2,13 +2,16 @@ require('dotenv').config();
 const soap = require('soap');
 const fs = require('fs');
 const url = process.env.URL;
+const util = require('util')
 
 console.log('Creating SOAP client for: ', process.env.URL);
 soap.createClient(url, { endpoint: url }, function(err, client) {
     if (err) {
         return console.log('Error creating SOAP client:', err.message, err.stack);
     }
-    console.log('Success creating SOAP client!', client.describe());
+    console.log('Success creating SOAP client!');
+    console.log(util.inspect(client.describe(), false, null, true /* enable colors */));
+
     const args = {
         clientType: process.env.IRC,
         userName: process.env.USERNAME,
