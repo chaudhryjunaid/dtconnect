@@ -31,11 +31,11 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
             console.log('isBuffer(content):', Buffer.isBuffer(content));
             const insertArgs = {
                 clientId,
-                sourceName: process.env.IRC,
+                sourceName: process.env.BUC,
                 sourceID: process.env.BUC,
                 xmlAssociationDoc: '',
                 mimeType: 'application/pdf',
-                documentFile: content
+                documentFile: 'ABC=='
             };
             client.InsertDocument(insertArgs, function(err, insertResult) {
                 if (err) {
