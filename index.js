@@ -33,7 +33,7 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
                 clientId,
                 sourceName: process.env.BUC,
                 sourceID: process.env.BUC,
-                xmlAssociationDoc: '',
+                // xmlAssociationDoc: '',
                 mimeType: 'application/pdf',
                 documentFile: 'ABC=='
             };
