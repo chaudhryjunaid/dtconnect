@@ -22,15 +22,15 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
             return console.log('Error registering client:', err.message, err.stack);
         }
         console.log('Register result:', result);
-        const cookieValue = result.RegisterResult;
-        console.log('clientId:', cookieValue);
+        const clientId = result.RegisterResult;
+        console.log('clientId:', clientId);
         fs.readFile('sum.pdf', {encoding: 'base64'}, function(err, content) {
             if (err) {
                 return console.log('Error reading file:', err.message, err.stack);
             }
             console.log('isBuffer(content):', Buffer.isBuffer(content));
             const insertArgs = {
-                clientId: cookieValue,
+                clientId,
                 sourceName: process.env.IRC,
                 sourceID: process.env.BUC,
                 xmlAssociationDoc: null,
