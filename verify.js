@@ -29,7 +29,7 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
             clientId,
             batchId
         };
-        client.GetInsertDocuments(insertArgs, function(err, getDocsResult) {
+        client.GetInsertDocuments(verifyArgs, function(err, getDocsResult) {
             if (err) {
                 return console.log('Error in GetInsertDocuments:', err.message, err.stack);
             }
