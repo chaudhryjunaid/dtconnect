@@ -32,10 +32,10 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
             const insertArgs = {
                 clientId,
                 sourceName: process.env.BUC,
-                sourceID: process.env.BUC,
+                sourceId: process.env.BUC,
                 // xmlAssociationDoc: '',
                 mimeType: 'application/pdf',
-                documentFile: 'ABC=='
+                documentFile: content
             };
             client.InsertDocument(insertArgs, function(err, insertResult) {
                 if (err) {
