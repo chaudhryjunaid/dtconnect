@@ -1,4 +1,6 @@
 require('dotenv').config();
+const request = require('request');
+require('request-debug')(request);
 const soap = require('soap');
 const fs = require('fs');
 const url = process.env.URL;
