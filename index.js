@@ -11,6 +11,17 @@ const fs = require('fs');
 const url = process.env.URL;
 const util = require('util')
 
+
+const getXmlAssocDoc = () => {
+    return (
+        `<EntityRootData>
+            <RXs>
+            <RX Associate="1" UniqueID="758655" MedicationName="Nebivolol Hydrochloride" Status="Active" FirstName="Matt" LastName="Henry" FacilityUniqueID="5209" PatientBirthday="1/20/2015" PatientSSN="796-11-4091" PatientRoom="192" FacilityName="Burbank Retirement Living" />
+            </RXs>
+        </EntityRootData>`
+    );
+};
+
 console.log('Creating SOAP client for: ', process.env.URL);
 soap.createClient(url, { endpoint: url }, function(err, client) {
     if (err) {
@@ -40,7 +51,7 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
                 clientId,
                 sourceName: process.env.BUC,
                 sourceId: process.env.BUC,
-                // xmlAssociationDoc: '',
+                xmlAssociationDoc: getXmlAssocDoc(),
                 mimeType: 'application/pdf',
                 documentFile: content
             };
@@ -51,6 +62,5 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
                 console.log('InsertDocument result:', insertResult);
             });
         });
-        
     });
 });
