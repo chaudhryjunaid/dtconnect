@@ -7,6 +7,7 @@ require('request-debug')(request, function(type, data, r) {
     console.log('body:', data.body);
 });
 const soap = require('soap');
+const { create } = require('xmlbuilder2');
 const fs = require('fs');
 const url = process.env.URL;
 const util = require('util')
@@ -22,6 +23,27 @@ const getXmlAssocDoc = () => {
     );
 };
 
+const getXml = (xmlObj) => {
+    const doc = create(xmlObj);
+    const xml = doc.end({ prettyPrint: true });
+    return xml;
+};
+
+const getXmlArgs = (argsObj = {}) => {
+    const paramsObj = {
+        Parameters: {
+            clientType: process.env.IRC,
+            userName: process.env.USERNAME,
+            // clientIPAddress: null,
+        }
+    };
+    for (const [key, val] of argsObj.entries()) {
+        console.log('$$', key, val);
+        paramsObj.Parameters[key] = val;
+    }
+    return paramsObj;
+};
+
 console.log('Creating SOAP client for: ', process.env.URL);
 soap.createClient(url, { endpoint: url }, function(err, client) {
     if (err) {
@@ -30,9 +52,11 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
     console.log('Success creating SOAP client!');
     console.log(util.inspect(client.describe(), false, null, true /* enable colors */));
 
+    const xmlArgs = getXmlArgs({});
+    const parametersXml = getXml(xmlArgs);
     const args = {
         command: 'GetDirectConnectVersion',
-        // parametersXml: '',
+        parametersXml,
     };
     client.DirectConnectExecute(args, function(err, result) {
         if (err) {
