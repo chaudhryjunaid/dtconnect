@@ -45,26 +45,48 @@ const getXmlArgs = (argsObj = {}) => {
     return paramsObj;
 };
 
-console.log('Creating SOAP client for: ', process.env.URL);
-soap.createClient(url, { endpoint: url }, function(err, client) {
-    if (err) {
-        return console.log('Error creating SOAP client:', err.message, err.stack);
-    }
-    console.log('Success creating SOAP client!');
-    console.log(util.inspect(client.describe(), false, null, true /* enable colors */));
-
-    const xmlArgs = getXmlArgs({});
-    const parametersXml = getXml(xmlArgs);
-    const args = {
-        command: 'GetDirectConnectVersion',
-        parametersXml,
-    };
-    client.DirectConnectExecute(args, function(err, result) {
-        if (err) {
-            return console.log('Error dce:', err.message, err.stack);
-        }
-        console.log('Register result:', result);
+const createClient = (url) => {
+    return new Promise((resolve, reject) => {
+        console.log('Creating SOAP client for: ', process.env.URL);
+        soap.createClient(url, { endpoint: url }, function(err, client) {
+            if (err) {
+                console.log('Error creating SOAP client:', err.message, err.stack);
+                return reject(err);
+            }
+            console.log('Success creating SOAP client!');
+            console.log(util.inspect(client.describe(), false, null, true /* enable colors */));
+            return resolve(client);
+        });
     });
+}
+
+const callDirectConnectExecuteCommand = (command, argsObj) => {
+    return new Promise((resolve, reject) => {
+        const xmlArgs = getXmlArgs(argsObj);
+        const parametersXml = getXml(xmlArgs);
+        const args = {
+            command,
+            parametersXml,
+        };
+        client.DirectConnectExecute(args, function(err, result) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+
+(async function() {
+    try {
+        const client = await createClient(url);
+        const versionResult = await callDirectConnectExecuteCommand('GetDirectConnectVersion');
+        console.log('$$ VERSION RESULT:\n', versionResult);
+    } catch (e) {
+        console.log('Error: ', e.message, e.stack);
+    }
+})();
+
     // const args = {
     //     clientType: process.env.IRC,
     //     userName: process.env.USERNAME,
@@ -98,4 +120,3 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
     //         });
     //     });
     // });
-});
