@@ -33,14 +33,14 @@ const getXml = (xmlObj) => {
 const getXmlArgs = (argsObj = {}) => {
     const paramsObj = {
         Parameters: {
-            ClientType: process.env.IRC,
-            ClientUserName: process.env.USERNAME,
-            // ClientIPAddress: null,
+            '$ClientType': process.env.IRC,
+            '$ClientUserName': process.env.USERNAME,
+            // '$ClientIPAddress': null,
         }
     };
     for (const [key, val] of Object.entries(argsObj)) {
         console.log('$$', key, val);
-        paramsObj.Parameters[key] = val;
+        paramsObj.Parameters['$'+key] = val;
     }
     return paramsObj;
 };
