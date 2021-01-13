@@ -25,7 +25,7 @@ const getXmlAssocDoc = () => {
 
 const getXml = (xmlObj) => {
     const doc = create(xmlObj);
-    const xml = doc.end({headless: true, prettyPrint: true});
+    const xml = doc.end({headless: true});
     console.log('##\n', xml);
     return xml;
 };
