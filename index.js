@@ -77,7 +77,18 @@ const callDirectConnectExecuteCommand = (client, command, argsObj) => {
             if (err) {
                 return reject(err);
             }
-            resolve(result);
+            if ('DirectConnectExecuteResult' in result) {
+                const resultDoc = create(result.DirectConnectExecuteResult);
+                const json = resultDoc.end({ format: 'object' });
+                resolve({
+                    status: 'parsed',
+                    value: json
+                });
+            }
+            resolve({
+                status: 'verbatim',
+                value: result
+            });
         });
     });
 };
