@@ -9,6 +9,7 @@ require('request-debug')(request, function(type, data, r) {
 const soap = require('soap');
 const { create } = require('xmlbuilder2');
 const fs = require('fs');
+const _ = require('lodash');
 const url = process.env.URL;
 const util = require('util')
 
@@ -77,7 +78,7 @@ const callDirectConnectExecuteCommand = (client, command, argsObj) => {
             if (err) {
                 return reject(err);
             }
-            if ('DirectConnectExecuteResult' in result) {
+            if (_.isPlainObject(result) && _.has(result, 'DirectConnectExecuteResult')) {
                 const resultDoc = create(result.DirectConnectExecuteResult);
                 const json = resultDoc.end({ format: 'object' });
                 resolve({
