@@ -37,7 +37,7 @@ const getXmlArgs = (argsObj = {}) => {
             // clientIPAddress: null,
         }
     };
-    for (const [key, val] of argsObj.entries()) {
+    for (const [key, val] of Object.entries(argsObj)) {
         console.log('$$', key, val);
         paramsObj.Parameters[key] = val;
     }
