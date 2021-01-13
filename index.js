@@ -115,8 +115,10 @@ const readFile = (filename) => {
             'InsertDocument',
             {
                 SourceID: 'test-doc',
-                MimeType: ' integra/file-extension/.pdf',
-                DocumentFile: content
+                MimeType: 'integra/file-extension/.pdf',
+                DocumentFile: content,
+                BusinessUnitCode: process.env.BUC,
+                AssociationXML: getXmlAssocDoc()
             }
         );
         console.log('$$ INSERT_DOC RESULT:\n', insertDocResult);
