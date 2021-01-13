@@ -75,18 +75,41 @@ const callDirectConnectExecuteCommand = (client, command, argsObj) => {
             resolve(result);
         });
     });
-}
+};
+
+const readFile = (filename) => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filename, {encoding: 'base64'}, function(err, content) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(content);
+    });
+} 
 
 (async function() {
     try {
         const client = await createClient(url);
         const versionResult = await callDirectConnectExecuteCommand(client, 'GetDirectConnectVersion');
         console.log('$$ VERSION RESULT:\n', versionResult);
+        const content = await readFile('sum.pdf');
+        const insertDocResult = await callDirectConnectExecuteCommand(
+            client,
+            'InsertDocument',
+            {
+                SourceID: 'test-doc',
+                MimeType: ' integra/file-extension/.pdf',
+                DocumentFile: content
+            }
+        );
+        console.log('$$ INSERT_DOC RESULT:\n', insertDocResult);
     } catch (e) {
         console.log('Error: ', e.message, e.stack);
     }
 })();
 
+
+// // OLD WAY:
     // const args = {
     //     clientType: process.env.IRC,
     //     userName: process.env.USERNAME,
