@@ -60,7 +60,7 @@ const createClient = (url) => {
     });
 }
 
-const callDirectConnectExecuteCommand = (command, argsObj) => {
+const callDirectConnectExecuteCommand = (client, command, argsObj) => {
     return new Promise((resolve, reject) => {
         const xmlArgs = getXmlArgs(argsObj);
         const parametersXml = getXml(xmlArgs);
@@ -80,7 +80,7 @@ const callDirectConnectExecuteCommand = (command, argsObj) => {
 (async function() {
     try {
         const client = await createClient(url);
-        const versionResult = await callDirectConnectExecuteCommand('GetDirectConnectVersion');
+        const versionResult = await callDirectConnectExecuteCommand(client, 'GetDirectConnectVersion');
         console.log('$$ VERSION RESULT:\n', versionResult);
     } catch (e) {
         console.log('Error: ', e.message, e.stack);
