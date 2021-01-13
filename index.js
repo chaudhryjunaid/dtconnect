@@ -84,8 +84,9 @@ const readFile = (filename) => {
                 return reject(err);
             }
             return resolve(content);
+        });
     });
-} 
+};
 
 (async function() {
     try {
