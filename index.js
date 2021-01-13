@@ -32,7 +32,7 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
 
     const args = {
         command: 'GetDirectConnectVersion',
-        parametersXml: '',
+        // parametersXml: '',
     };
     client.DirectConnectExecute(args, function(err, result) {
         if (err) {
