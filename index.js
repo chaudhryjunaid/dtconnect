@@ -30,6 +30,16 @@ soap.createClient(url, { endpoint: url }, function(err, client) {
     console.log('Success creating SOAP client!');
     console.log(util.inspect(client.describe(), false, null, true /* enable colors */));
 
+    const args = {
+        command: 'GetDirectConnectVersion',
+        parametersXml: '',
+    };
+    client.DirectConnectExecute(args, function(err, result) {
+        if (err) {
+            return console.log('Error dce:', err.message, err.stack);
+        }
+        console.log('Register result:', result);
+    });
     // const args = {
     //     clientType: process.env.IRC,
     //     userName: process.env.USERNAME,
