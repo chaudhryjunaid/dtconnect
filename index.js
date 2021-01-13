@@ -17,7 +17,7 @@ const getXmlAssocDoc = () => {
     return (
         `<EntityRootData>
             <RXs>
-            <RX Associate="1" UniqueID="758655" MedicationName="Nebivolol Hydrochloride" Status="Active" FirstName="Matt" LastName="Henry" FacilityUniqueID="5209" PatientBirthday="1/20/2015" PatientSSN="796-11-4091" PatientRoom="192" FacilityName="Burbank Retirement Living" />
+            <RX Associate="1" UniqueID="758655" MedicationName="Nebivolol Hydrochloride" Status="Active" FirstName="Matt" LastName="Henry" FacilityUniqueID="5209" PatientBirthday="1/20/2015" PatientSSN="796-11-4091" PatientRoom="192" FacilityName="Burbank Retirement Living" OriginatingSourceCode="QS/1" />
             </RXs>
         </EntityRootData>`
     );
