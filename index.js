@@ -33,9 +33,9 @@ const getXml = (xmlObj) => {
 const getXmlArgs = (argsObj = {}) => {
     const paramsObj = {
         Parameters: {
-            clientType: process.env.IRC,
-            userName: process.env.USERNAME,
-            // clientIPAddress: null,
+            ClientType: process.env.IRC,
+            ClientUserName: process.env.USERNAME,
+            // ClientIPAddress: null,
         }
     };
     for (const [key, val] of Object.entries(argsObj)) {
