@@ -31,16 +31,21 @@ const getXml = (xmlObj) => {
 };
 
 const getXmlArgs = (argsObj = {}) => {
+    const updatedArgsObj = {
+        ...argsObj,
+        ClientType: process.env.IRC,
+        ClientUserName: process.env.USERNAME,
+        // ClientIPAddress: null,
+    };
     const paramsObj = {
         Parameters: {
-            '$ClientType': process.env.IRC,
-            '$ClientUserName': process.env.USERNAME,
-            // '$ClientIPAddress': null,
         }
     };
-    for (const [key, val] of Object.entries(argsObj)) {
+    for (const [key, val] of Object.entries(updatedArgsObj)) {
         console.log('$$', key, val);
-        paramsObj.Parameters['$'+key] = val;
+        paramsObj.Parameters[key] = {
+            '$': val
+        };
     }
     return paramsObj;
 };
