@@ -1,5 +1,5 @@
 require('dotenv').config();
-const request = require('request');
+const request = require("request").defaults({strictSSL: false});
 require('request-debug')(request, function(type, data, r) {
     console.log('uri:', r.method, r.uri);
     console.log('type:', type);
@@ -54,7 +54,7 @@ const getXmlArgs = (argsObj = {}) => {
 const createClient = (url) => {
     return new Promise((resolve, reject) => {
         console.log('Creating SOAP client for: ', process.env.URL);
-        soap.createClient(url, { endpoint: url }, function(err, client) {
+        soap.createClient(url, { endpoint: url, request }, function(err, client) {
             if (err) {
                 console.log('Error creating SOAP client:', err.message, err.stack);
                 return reject(err);
